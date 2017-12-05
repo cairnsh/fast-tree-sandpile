@@ -1,0 +1,53 @@
+May 25, 2016: version 1.0
+
+This is a Python 2 implementation of the round sequence Ramachandran-Schild
+algorithm, described in the enclosed PDF. It runs with Python 2.7.10.
+
+These programs were written by Hannah Cairns <hannah.abigail.cairns@gmail.com>.
+They do not contain anyone else's code. I release them into the public domain.
+
+FILES:
+
+btree.py: a Python implementation of a B-tree with linear polynomial coefficients
+
+usage example:
+import btree
+new_tree = btree.btree()
+new_tree.add(btree.node(2, 4))
+new_tree.add(btree.node(0, 6))
+obj = btree.node(1, 3)
+new_tree.add(obj)
+
+print new_tree.serialize()
+print tuple(new_tree.traverser())
+print new_tree.first()
+
+new_tree.add_poly_to(1, 1) # add x + 1
+
+print new_tree.serialize()
+print tuple(new_tree.traverser())
+
+new_tree.delete(btree.node(2, 4))
+new_tree.delete(btree.node(5, 4))
+new_tree.delete_first()
+new_tree.delete_object(obj)
+print new_tree.serialize()
+
+btreetest.py: unit tests for btree.py
+
+usage example:
+import btreetest
+btreetest.unit()
+btreetest.speedtest()
+btreetest.profile()
+
+fastsand.py: implementation of the round sequence Ramachandran-Schild algorithm.
+
+usage example:
+import fastsand
+fastsand.stabilize([0, 0, 1, 2, 3, 4, 5, 0, 7, 8, 9, 10, 11],
+                   [0, 0, 0, 0, 0, 0, 3, 0, 3, 0, 0, 0, 0])
+
+README: a beautiful poem
+
+RSRS algorithm explanation.pdf: an explanation of the RSRS algorithm
