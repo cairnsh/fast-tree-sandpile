@@ -365,7 +365,8 @@ def test():
     SLS2 = math.ceil(SIZE * (math.log(SIZE, 2)) * 0.5)
     print """This test generates random trees, adds a large number of chips to one
 vertex, and compares the results of fast and slow stabilization. If there is
-a problem (too much work, results are not equal) it will throw an exception.
+a problem (the fast algorithm does more work than it is guaranteed to do, or
+the results of the two algorithms are not equal) it will throw an exception.
 
 Note: the slow stabilization is written in the simplest possible way, so the
 speed comparison is not really fair. It is just there to make sure that the
@@ -408,6 +409,8 @@ pop      | How many times do we pop the first element?     | Maximum: %d\n""" % 
                 return "%d (%2.0f%%)" % (x, 100.0*x/float(SIZE * n))
         print "merge %s; extract %s; first %s; pop %s" % (tuple(map(compare_to_sls, stats[0:2])) + (compare_to_s(stats[2], 3), compare_to_s(stats[3], 1)))
         print "starting slow stabilization...",
+        import sys
+        sys.stdout.flush()
         t1 = time.clock()
         s2 = simulation_stabilize(*tree)
         t2 = time.clock() - t1

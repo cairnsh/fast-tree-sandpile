@@ -1,0 +1,3 @@
+import fastsand
+
+fastsand.test()
